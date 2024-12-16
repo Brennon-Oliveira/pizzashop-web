@@ -16,6 +16,7 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { useQuery } from "@tanstack/react-query";
+import { OrderDetailsSkeleton } from "./OrderDetailsSkeleton";
 
 interface OrderDetailsProps {
 	orderId: string;
@@ -35,13 +36,13 @@ export function OrderDatails({ open, orderId }: OrderDetailsProps) {
 				<DialogDescription>Detalhes do pedido</DialogDescription>
 			</DialogHeader>
 
-			{order && (
+			{order ? (
 				<div className="space-y-6">
 					<Table>
 						<TableBody>
 							<TableRow>
 								<TableCell className="text-muted-foreground">Status</TableCell>
-								<TableCell className="flex justify-center">
+								<TableCell className="flex justify-end">
 									<OrderStatus status={order.status} />
 								</TableCell>
 							</TableRow>
@@ -49,7 +50,7 @@ export function OrderDatails({ open, orderId }: OrderDetailsProps) {
 								<TableCell className="text-muted-foreground">
 									Nome do cliente
 								</TableCell>
-								<TableCell className="flex justify-center">
+								<TableCell className="flex justify-end">
 									{order.customer.name}
 								</TableCell>
 							</TableRow>
@@ -57,13 +58,13 @@ export function OrderDatails({ open, orderId }: OrderDetailsProps) {
 								<TableCell className="text-muted-foreground">
 									Telefone
 								</TableCell>
-								<TableCell className="flex justify-center">
+								<TableCell className="flex justify-end">
 									{order.customer.phone ?? "Não informado"}
 								</TableCell>
 							</TableRow>
 							<TableRow>
 								<TableCell className="text-muted-foreground">Email</TableCell>
-								<TableCell className="flex justify-center">
+								<TableCell className="flex justify-end">
 									{order.customer.email}
 								</TableCell>
 							</TableRow>
@@ -82,15 +83,17 @@ export function OrderDatails({ open, orderId }: OrderDetailsProps) {
 						<TableBody>
 							{order.orderItems.map((item) => (
 								<TableRow key={item.id}>
-									<TableCell>{item.product.name}</TableCell>
-									<TableCell>{item.quantity}</TableCell>
-									<TableCell>
+									<TableCell className="text-left">
+										{item.product.name}
+									</TableCell>
+									<TableCell className="text-right">{item.quantity}</TableCell>
+									<TableCell className="text-right">
 										{(item.priceInCents / 100).toLocaleString("pt-BR", {
 											style: "currency",
 											currency: "BRL",
 										})}
 									</TableCell>
-									<TableCell>
+									<TableCell className="text-right">
 										{((item.priceInCents * item.quantity) / 100).toLocaleString(
 											"pt-BR",
 											{
@@ -113,6 +116,8 @@ export function OrderDatails({ open, orderId }: OrderDetailsProps) {
 						</TableFooter>
 					</Table>
 				</div>
+			) : (
+				<OrderDetailsSkeleton />
 			)}
 		</DialogContent>
 	);
