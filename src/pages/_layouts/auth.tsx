@@ -10,7 +10,7 @@ export function AuthLayout() {
 					<span className="font-semibold">pizza.shop</span>
 				</div>
 				<footer className="text-sm">
-					Painel do perceiro @copy; pizza.shop = {new Date().getFullYear()}
+					Painel do perceiro &copy; pizza.shop = {new Date().getFullYear()}
 				</footer>
 			</div>
 
