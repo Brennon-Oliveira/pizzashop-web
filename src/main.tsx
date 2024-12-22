@@ -2,9 +2,12 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App.tsx";
 import "./styles/tailwind.css";
+import { enableMSW } from "./api/mocks/index.ts";
 
-createRoot(document.getElementById("root")!).render(
-	<StrictMode>
-		<App />
-	</StrictMode>,
+enableMSW().then(() =>
+	createRoot(document.getElementById("root")!).render(
+		<StrictMode>
+			<App />
+		</StrictMode>,
+	),
 );
