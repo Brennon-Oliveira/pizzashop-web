@@ -30,22 +30,26 @@ export function SignUp() {
 		mutationFn: registerRestaurant,
 	});
 
-	async function handleSigin(data: SignUpForm) {
-		await registerRestaurantFn({
-			restaurantName: data.restaurantName,
-			managerName: data.managerName,
-			email: data.email,
-			phone: data.phone,
-		});
+	async function handleSignUp(data: SignUpForm) {
+		try {
+			await registerRestaurantFn({
+				restaurantName: data.restaurantName,
+				managerName: data.managerName,
+				email: data.email,
+				phone: data.phone,
+			});
 
-		toast.success("Restaurante cadastrado com sucesso!", {
-			action: {
-				label: "Login",
-				onClick: () => {
-					navigate(`/auth/sign-in?email=${data.email}`);
+			toast.success("Restaurante cadastrado com sucesso!", {
+				action: {
+					label: "Login",
+					onClick: () => {
+						navigate(`/auth/sign-in?email=${data.email}`);
+					},
 				},
-			},
-		});
+			});
+		} catch {
+			toast.error("Erro ao cadastrar restaurante.");
+		}
 	}
 
 	return (
@@ -65,7 +69,7 @@ export function SignUp() {
 						</p>
 					</div>
 
-					<form className="space-y-4" onSubmit={handleSubmit(handleSigin)}>
+					<form className="space-y-4" onSubmit={handleSubmit(handleSignUp)}>
 						<div className="space-y-2">
 							<Label htmlFor="restaurantName">Nome do restaurante</Label>
 							<Input
