@@ -17,10 +17,10 @@ test("Sign up successfully", async ({ page }) => {
 
 	const emailInput = page.getByLabel("Seu e-mail");
 
-	expect(toast).toBeVisible();
+	await expect(toast).toBeVisible();
 	expect(page.url()).toContain("/auth/sign-in");
 	expect(page.url()).toContain("johndoe@example.com");
-	expect(emailInput.inputValue()).resolves.toEqual("johndoe@example.com");
+	await expect(emailInput.inputValue()).resolves.toEqual("johndoe@example.com");
 });
 
 test("Sign in with error", async ({ page }) => {
@@ -36,7 +36,7 @@ test("Sign in with error", async ({ page }) => {
 
 	const toast = page.getByText("Erro ao cadastrar restaurante.");
 
-	expect(toast).toBeVisible();
+	await expect(toast).toBeVisible();
 });
 
 test("Navigate to login page", async ({ page }) => {

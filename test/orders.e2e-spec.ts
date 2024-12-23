@@ -10,8 +10,8 @@ test("list orders", async ({ page }) => {
 
 	await first.waitFor({ timeout: 1000 });
 
-	expect(first).toBeVisible();
-	expect(page.getByRole("cell", { name: "Customer 10" })).toBeVisible();
+	await expect(first).toBeVisible();
+	await expect(page.getByRole("cell", { name: "Customer 10" })).toBeVisible();
 });
 
 test("paginate orders", async ({ page }) => {
@@ -52,8 +52,8 @@ test("paginate orders", async ({ page }) => {
 
 	await first4.waitFor({ timeout: 1000 });
 
-	expect(first4).toBeVisible();
-	expect(page.getByRole("cell", { name: "Customer 10" })).toBeVisible();
+	await expect(first4).toBeVisible();
+	await expect(page.getByRole("cell", { name: "Customer 10" })).toBeVisible();
 });
 
 test("filter by order id", async ({ page }) => {
@@ -71,8 +71,8 @@ test("filter by order id", async ({ page }) => {
 
 	await item.waitFor({ timeout: 1000 });
 
-	expect(item).toBeVisible();
-	expect(page.getByRole("table").getByText("Cancelado")).toBeVisible();
+	await expect(item).toBeVisible();
+	await expect(page.getByRole("table").getByText("Cancelado")).toBeVisible();
 });
 
 test("filter by customer name", async ({ page }) => {
@@ -90,8 +90,8 @@ test("filter by customer name", async ({ page }) => {
 
 	await item.waitFor({ timeout: 1000 });
 
-	expect(item).toBeVisible();
-	expect(page.getByRole("table").getByText("Cancelado")).toBeVisible();
+	await expect(item).toBeVisible();
+	await expect(page.getByRole("table").getByText("Cancelado")).toBeVisible();
 });
 
 test("filter by status", async ({ page }) => {

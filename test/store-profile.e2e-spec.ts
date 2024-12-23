@@ -25,6 +25,6 @@ test("update profile successfully", async ({ page }) => {
 
 	await updatedButton.waitFor({ timeout: 1000 });
 
-	expect(toast).toBeVisible();
-	expect(updatedButton).toBeVisible();
+	await expect(toast).toBeVisible();
+	await expect(updatedButton).toBeVisible();
 });
